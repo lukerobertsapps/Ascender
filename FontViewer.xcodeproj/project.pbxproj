@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		F55FFD502F2A399B0020BA9E /* FontViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FontViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F55FFD502F2A399B0020BA9E /* Ascender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ascender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		F55FFD512F2A399B0020BA9E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F55FFD502F2A399B0020BA9E /* FontViewer.app */,
+				F55FFD502F2A399B0020BA9E /* Ascender.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F55FFD4F2F2A399B0020BA9E /* FontViewer */ = {
+		F55FFD4F2F2A399B0020BA9E /* Ascender */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F55FFD5B2F2A399D0020BA9E /* Build configuration list for PBXNativeTarget "FontViewer" */;
+			buildConfigurationList = F55FFD5B2F2A399D0020BA9E /* Build configuration list for PBXNativeTarget "Ascender" */;
 			buildPhases = (
 				F55FFD4C2F2A399B0020BA9E /* Sources */,
 				F55FFD4D2F2A399B0020BA9E /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				F55FFD522F2A399B0020BA9E /* FontViewer */,
 			);
-			name = FontViewer;
+			name = Ascender;
 			packageProductDependencies = (
 			);
 			productName = FontViewer;
-			productReference = F55FFD502F2A399B0020BA9E /* FontViewer.app */;
+			productReference = F55FFD502F2A399B0020BA9E /* Ascender.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F55FFD4F2F2A399B0020BA9E /* FontViewer */,
+				F55FFD4F2F2A399B0020BA9E /* Ascender */,
 			);
 		};
 /* End PBXProject section */
@@ -276,7 +276,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = co.lukeroberts.FontViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -319,7 +319,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.6;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = co.lukeroberts.FontViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -343,7 +343,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F55FFD5B2F2A399D0020BA9E /* Build configuration list for PBXNativeTarget "FontViewer" */ = {
+		F55FFD5B2F2A399D0020BA9E /* Build configuration list for PBXNativeTarget "Ascender" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F55FFD5C2F2A399D0020BA9E /* Debug */,

@@ -21,8 +21,9 @@ final class FontModel: ObservableObject {
 
     @Published var fontSize: CGFloat = 42
 
-    var unitsPerEm: UInt32 = 0
+    @Published var showingMissingTools = false
 
+    var unitsPerEm: UInt32 = 0
     var cachedURL: URL?
 
     var convertedAscender: Int {
@@ -55,6 +56,11 @@ final class FontModel: ObservableObject {
         self.cachedURL = url
     }
 
+    func checkFontToolsInstalled() {
+        let fontTools = locateExecutable()
+        showingMissingTools = fontTools == nil
+    }
+
     func apply() {
         do {
             try applyChangeToFont()
@@ -68,7 +74,6 @@ final class FontModel: ObservableObject {
     }
 
     private func applyChangeToFont() throws {
-        // Make temp directory
         let tempRoot = FileManager.default.temporaryDirectory
         let workDir = tempRoot.appendingPathComponent(UUID().uuidString)
         try FileManager.default.createDirectory(
@@ -76,7 +81,6 @@ final class FontModel: ObservableObject {
             withIntermediateDirectories: true
         )
 
-        // Copy font
         guard let cachedURL else { return }
         let tempFontURL = workDir.appendingPathComponent(cachedURL.lastPathComponent)
         try FileManager.default.copyItem(at: cachedURL, to: tempFontURL)
@@ -105,7 +109,6 @@ final class FontModel: ObservableObject {
         try contents.write(to: hheaURL, atomically: true, encoding: .utf8)
 
         try runFTX(toolURL: toolURL, fontURL: tempFontURL, recombine: true)
-
         promptToSaveFont(finalFontURL: tempFontURL, suggestedName: tempFontURL.lastPathComponent) {
             try? FileManager.default.removeItem(at: workDir)
         }

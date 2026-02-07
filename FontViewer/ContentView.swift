@@ -45,7 +45,11 @@ struct ContentView: View {
                     }
 
                 } else {
-                    uploadFont
+                    if model.showingMissingTools {
+                        missingTools
+                    } else {
+                        uploadFont
+                    }
                 }
             }
             .onDrop(of: [UTType.fileURL], isTargeted: nil) { providers in
@@ -56,7 +60,27 @@ struct ContentView: View {
                     columnVisibility = .all
                 }
             }
+            .onAppear {
+                model.checkFontToolsInstalled()
+            }
         }
+    }
+
+    private var missingTools: some View {
+        VStack {
+            Image(systemName: "hammer.fill")
+                .resizable().scaledToFit().frame(width: 64, height: 64)
+                .padding(.bottom)
+            Text("Apple font tools are required to use this application")
+            Button("Download Tools") {
+                let url = URL(string: "https://developer.apple.com/fonts/")!
+                if NSWorkspace.shared.open(url) {
+                    print("default browser was successfully opened")
+                }
+            }
+        }
+        .foregroundColor(.secondary)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private var uploadFont: some View {
