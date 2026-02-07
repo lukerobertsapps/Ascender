@@ -22,20 +22,8 @@ Ascender provides a way to adjust a font's vertical alignment. This solves commo
 
 - Drag & drop `.ttf` / `.otf` fonts
 - Visualizes:
-  - Baseline
   - Ascender
   - Descender
 - Live adjustment via sliders
-- Displays values in points (derived from font units)
+- Displays exact values
 - Exports a modified font using Apple Font Tools
-- Non-destructive workflow (original font is never modified)
-
-## How it works
-
-1. A font is copied into a temporary working directory
-2. Apple Font Tools (`ftxdumperfuser`, `ftxsplitfont`, `ftxbuildfont`) are used to:
-   - Inspect font tables
-   - Apply updated ascender / descender values
-   - Rebuild the font
-3. The user is prompted to save the adjusted font
-4. Temporary files are cleaned up automatically
