@@ -21,7 +21,7 @@ Ascender provides a way to adjust a font's vertical alignment. This solves commo
 ## Features
 
 - Drag & drop `.ttf` / `.otf` fonts
-- Visualizes:
+- Visualises:
   - Ascender
   - Descender
 - Live adjustment via sliders
