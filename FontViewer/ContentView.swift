@@ -43,7 +43,6 @@ struct ContentView: View {
                             descender: model.descender + model.descenderOffset
                         )
                     }
-
                 } else {
                     if model.showingMissingTools {
                         missingTools

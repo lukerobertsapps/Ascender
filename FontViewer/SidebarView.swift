@@ -73,8 +73,6 @@ struct SidebarView: View {
                     model.apply()
                 }
             }
-
-
         }
     }
 
@@ -89,32 +87,11 @@ struct SidebarView: View {
                 .font(.system(.caption, design: .monospaced))
                 .foregroundColor(.secondary)
 
-
             Slider(
                 value: offset,
                 in: -100...100,
                 step: 0.5
             )
         }
-    }
-}
-
-
-struct FontPreviewView: NSViewRepresentable {
-    let ctFont: CTFont
-    let displayText: String
-    let ascender: CGFloat
-    let descender: CGFloat
-
-    func makeNSView(context: Context) -> FontDrawingView {
-        FontDrawingView()
-    }
-
-    func updateNSView(_ nsView: FontDrawingView, context: Context) {
-        nsView.ctFont = ctFont
-        nsView.text = displayText
-        nsView.ascender = ascender
-        nsView.descender = descender
-        nsView.needsDisplay = true
     }
 }

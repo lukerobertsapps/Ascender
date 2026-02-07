@@ -7,6 +7,25 @@
 
 import SwiftUI
 
+struct FontPreviewView: NSViewRepresentable {
+    let ctFont: CTFont
+    let displayText: String
+    let ascender: CGFloat
+    let descender: CGFloat
+
+    func makeNSView(context: Context) -> FontDrawingView {
+        FontDrawingView()
+    }
+
+    func updateNSView(_ nsView: FontDrawingView, context: Context) {
+        nsView.ctFont = ctFont
+        nsView.text = displayText
+        nsView.ascender = ascender
+        nsView.descender = descender
+        nsView.needsDisplay = true
+    }
+}
+
 final class FontDrawingView: NSView {
 
     var ctFont: CTFont?
