@@ -35,8 +35,8 @@ final class FontModel: ObservableObject {
 
     func loadFont(from url: URL? = nil) {
         guard
-            let url = url ?? cachedURL,
-            let descriptors = CTFontManagerCreateFontDescriptorsFromURL(url as CFURL) as? [CTFontDescriptor],
+            let fontURL = url ?? cachedURL,
+            let descriptors = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as? [CTFontDescriptor],
             let descriptor = descriptors.first
         else {
             print("Failed to load font")
@@ -49,11 +49,13 @@ final class FontModel: ObservableObject {
         ascender = CTFontGetAscent(font)
         descender = -CTFontGetDescent(font)
 
-        ascenderOffset = 0
-        descenderOffset = 0
+        if url != nil {
+            ascenderOffset = 0
+            descenderOffset = 0
+        }
 
         self.unitsPerEm = CTFontGetUnitsPerEm(font)
-        self.cachedURL = url
+        self.cachedURL = fontURL
     }
 
     func checkFontToolsInstalled() {
