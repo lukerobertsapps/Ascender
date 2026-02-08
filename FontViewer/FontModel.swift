@@ -19,7 +19,7 @@ final class FontModel: ObservableObject {
     @Published var ascenderOffset: CGFloat = 0
     @Published var descenderOffset: CGFloat = 0
 
-    @Published var fontSize: CGFloat = 42
+    @Published var fontSize: CGFloat = 64
 
     @Published var showingMissingTools = false
 

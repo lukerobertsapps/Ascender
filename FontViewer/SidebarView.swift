@@ -51,13 +51,14 @@ struct SidebarView: View {
                 .padding(.vertical)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Font Size (Preview Only)")
+                let size = Int(model.fontSize)
+                Text("Preview Size: \(size)")
                     .font(.system(.caption, design: .monospaced))
                     .foregroundColor(.secondary)
 
                 Slider(
                     value: $model.fontSize,
-                    in: 0...100,
+                    in: 10...150,
                     step: 1
                 )
             }
