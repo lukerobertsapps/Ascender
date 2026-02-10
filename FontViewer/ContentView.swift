@@ -24,24 +24,37 @@ struct ContentView: View {
             ZStack {
                 if let font = model.ctFont {
                     VStack {
-                        FontPreviewView(
-                            ctFont: font,
-                            displayText: "abcdefghijklmnopqrstuzwxyz",
-                            ascender: model.ascender + model.ascenderOffset,
-                            descender: model.descender + model.descenderOffset
-                        )
-                        FontPreviewView(
-                            ctFont: font,
-                            displayText: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                            ascender: model.ascender + model.ascenderOffset,
-                            descender: model.descender + model.descenderOffset
-                        )
-                        FontPreviewView(
-                            ctFont: font,
-                            displayText: "0123456789",
-                            ascender: model.ascender + model.ascenderOffset,
-                            descender: model.descender + model.descenderOffset
-                        )
+                        if !model.customText.isEmpty {
+                            FontPreviewView(
+                                ctFont: font,
+                                displayText: model.customText,
+                                ascender: model.ascender + model.ascenderOffset,
+                                descender: model.descender + model.descenderOffset
+                            )
+                            .scaleEffect(model.scale)
+                        } else {
+                            FontPreviewView(
+                                ctFont: font,
+                                displayText: "abcdefghijklmnopqrstuzwxyz",
+                                ascender: model.ascender + model.ascenderOffset,
+                                descender: model.descender + model.descenderOffset
+                            )
+                            .scaleEffect(model.scale)
+                            FontPreviewView(
+                                ctFont: font,
+                                displayText: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                                ascender: model.ascender + model.ascenderOffset,
+                                descender: model.descender + model.descenderOffset
+                            )
+                            .scaleEffect(model.scale)
+                            FontPreviewView(
+                                ctFont: font,
+                                displayText: "0123456789",
+                                ascender: model.ascender + model.ascenderOffset,
+                                descender: model.descender + model.descenderOffset
+                            )
+                            .scaleEffect(model.scale)
+                        }
                     }
                 } else {
                     if model.showingMissingTools {

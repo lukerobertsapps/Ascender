@@ -11,6 +11,11 @@ import Combine
 import UniformTypeIdentifiers
 
 final class FontModel: ObservableObject {
+
+    @Published var scale: CGFloat = 1
+    @Published var useCustom = false
+    @Published var customText: String = ""
+
     @Published var ctFont: CTFont?
 
     @Published var ascender: CGFloat = 0

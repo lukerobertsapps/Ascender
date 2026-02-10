@@ -50,18 +50,23 @@ struct SidebarView: View {
             Divider()
                 .padding(.vertical)
 
+            Text("Preview")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
+
+            TextField("Custom Text", text: $model.customText, prompt: Text("Custom Text"))
+                .padding(.top, 2)
+
             VStack(alignment: .leading, spacing: 8) {
-                let size = Int(model.fontSize)
-                Text("Preview Size: \(size)")
+                Text("Preview Size")
                     .font(.system(.caption, design: .monospaced))
                     .foregroundColor(.secondary)
-
                 Slider(
-                    value: $model.fontSize,
-                    in: 10...150,
-                    step: 1
+                    value: $model.scale,
+                    in: 0.5...1.5,
+                    step: 0.01
                 )
             }
+            .padding(.top, 8)
 
             Spacer()
 
