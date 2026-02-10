@@ -25,5 +25,5 @@ Ascender provides a way to adjust a font's vertical alignment. This solves commo
   - Ascender
   - Descender
 - Live adjustment via sliders
-- Displays exact values
+- Preview custom text
 - Exports a modified font using Apple Font Tools
