@@ -1,4 +1,5 @@
-# Ascender
+# <img src="./Screenshots/icon.png" width="28" align="center" /> &nbsp;Ascender
+
 
 A macOS utility for inspecting and adjusting font ascender and descender metrics with live visual feedback.
 
@@ -12,11 +13,10 @@ Ascender provides a way to adjust a font's vertical alignment. This solves commo
 ## Requirements
 
 - macOS
-- Xcode 16+
 - [Apple Font Tools](https://developer.apple.com/fonts/) installed
   (part of the Apple Fonts package)
 
-> Ascender relies on Apple’s font tooling rather than custom binary parsing.
+> Ascender relies on Apple’s font tooling
 
 ## Features
 
