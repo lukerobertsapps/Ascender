@@ -75,6 +75,11 @@ struct ContentView: View {
             .onAppear {
                 model.checkFontToolsInstalled()
             }
+            .alert("Error", isPresented: .constant(model.errorMessage != nil), actions: {
+                Button("OK") { model.errorMessage = nil }
+            }, message: {
+                Text(model.errorMessage ?? "")
+            })
         }
     }
 

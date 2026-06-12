@@ -1,9 +1,9 @@
 # <img src="./Screenshots/icon.png" width="28" align="center" /> &nbsp;Ascender
 
 
-A macOS utility for inspecting and adjusting font ascender and descender metrics with live visual feedback.
+A macOS tool for viewing and adjusting a fonts descender and descender.
 
-Ascender provides a way to adjust a font's vertical alignment. This solves common font rendering problems when developing iOS applications. Thanks to Andy Yardley for the [original article](https://www.andyyardley.com/2012/04/24/custom-ios-fonts-and-how-to-fix-the-vertical-position-problem/).
+This solves common font rendering problems when developing iOS applications. Thanks to Andy Yardley for the [original article](https://www.andyyardley.com/2012/04/24/custom-ios-fonts-and-how-to-fix-the-vertical-position-problem/).
 
 
 ![Ascender Preview](Screenshots/preview.png)

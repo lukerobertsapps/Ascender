@@ -27,6 +27,7 @@ final class FontModel: ObservableObject {
     @Published var fontSize: CGFloat = 64
 
     @Published var showingMissingTools = false
+    @Published var errorMessage: String?
 
     var unitsPerEm: UInt32 = 0
     var cachedURL: URL?
@@ -44,7 +45,7 @@ final class FontModel: ObservableObject {
             let descriptors = CTFontManagerCreateFontDescriptorsFromURL(fontURL as CFURL) as? [CTFontDescriptor],
             let descriptor = descriptors.first
         else {
-            print("Failed to load font")
+            errorMessage = "Failed to load font"
             return
         }
 
@@ -72,7 +73,7 @@ final class FontModel: ObservableObject {
         do {
             try applyChangeToFont()
         } catch {
-            print(error)
+            errorMessage = error.localizedDescription
         }
     }
 
@@ -88,19 +89,39 @@ final class FontModel: ObservableObject {
             withIntermediateDirectories: true
         )
 
-        guard let cachedURL else { return }
-        let tempFontURL = workDir.appendingPathComponent(cachedURL.lastPathComponent)
+        guard let cachedURL else {
+            throw NSError(domain: "FontModel", code: 1, userInfo: [NSLocalizedDescriptionKey: "No font loaded"])
+        }
+
+        guard
+            let descriptors = CTFontManagerCreateFontDescriptorsFromURL(cachedURL as CFURL) as? [CTFontDescriptor],
+            let descriptor = descriptors.first
+        else {
+            throw NSError(domain: "FontModel", code: 4, userInfo: [NSLocalizedDescriptionKey: "Could not read font descriptor"])
+        }
+
+        let tempFont = CTFontCreateWithFontDescriptor(descriptor, fontSize, nil)
+        let psName = (CTFontCopyName(tempFont, kCTFontPostScriptNameKey) as String?)
+            ?? cachedURL.deletingPathExtension().lastPathComponent
+
+        let ext = cachedURL.pathExtension
+        let tempFontURL = workDir.appendingPathComponent("\(psName).\(ext)")
         try FileManager.default.copyItem(at: cachedURL, to: tempFontURL)
 
         guard let toolURL = locateExecutable() else {
-            print("ftxdumperfuser not found")
-            return
+            throw NSError(
+                domain: "FontModel",
+                code: 2,
+                userInfo: [NSLocalizedDescriptionKey: "ftxdumperfuser not found. Install Apple Font Tools."]
+            )
         }
 
         try runFTX(toolURL: toolURL, fontURL: tempFontURL)
-        let fontBaseName = tempFontURL.deletingPathExtension().lastPathComponent
-        let hheaFileName = "\(fontBaseName).hhea.xml"
-        let hheaURL = workDir.appendingPathComponent(hheaFileName)
+
+        let dumpedFiles = try FileManager.default.contentsOfDirectory(at: workDir, includingPropertiesForKeys: nil)
+        guard let hheaURL = dumpedFiles.first(where: { $0.lastPathComponent.hasSuffix(".hhea.xml") }) else {
+            throw NSError(domain: "FontModel", code: 3, userInfo: [NSLocalizedDescriptionKey: "hhea table dump not found"])
+        }
 
         var contents = try String(contentsOf: hheaURL, encoding: .utf8)
         contents = contents.replacingOccurrences(
@@ -130,7 +151,6 @@ final class FontModel: ObservableObject {
         panel.allowedContentTypes = [.font]
         panel.nameFieldStringValue = suggestedName
         panel.canCreateDirectories = true
-
         panel.begin { response in
             guard response == .OK, let destinationURL = panel.url else {
                 return
@@ -143,7 +163,7 @@ final class FontModel: ObservableObject {
                 )
                 cleanup()
             } catch {
-                print("Failed to save font:", error)
+                self.errorMessage = "Failed to save font: \(error)"
             }
         }
     }
